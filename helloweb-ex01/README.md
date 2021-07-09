@@ -10,3 +10,7 @@
 ```
 
 4. app04.js : based on (connect + serve-static + connect-route) npm package(module)
+
+```
+[..\helloweb-ex01] $ npm i connect-route
+```
