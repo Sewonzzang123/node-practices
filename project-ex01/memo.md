@@ -40,5 +40,11 @@ Node(Javascript) project (Application, Package) 생성
 2. 프로젝트 디렉토리로 이동 (cd)
 3. [...\project-ex01] $ npm init -y >> 프로젝트 매니페스트 파일(package.json) 생성, 프로젝트 초기화
 
-[...\project-ex01] $
-[...\project-ex01] $
+모듈
+
+1. 코어모듈(fs, os, ... node에서 제공해주는 모듈)
+2. 파일모듈 : 파일의 경로로 불러와서 모듈안의 객체, 함수 클래스를 사용한다.
+3. npm모듈 : npm을 통해서 node_modules에 설치해서 사용하는 모듈
+   패키지 설치 방법
+   1. 로컬 배포
+   2. 원격 배포
