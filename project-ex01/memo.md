@@ -48,3 +48,17 @@ Node(Javascript) project (Application, Package) 생성
    패키지 설치 방법
    1. 로컬 배포
    2. 원격 배포
+
+==========================================
+npmjs.com npm registry에 패키지 배포하기
+
+1. 사용자 등록
+   [..\sewon-math] $ npm adduser
+   Username: sewon0618
+   Password:
+   email : dkrlrhdrur@gmail.com
+2. 업로드
+   [..\sewon-math] $ npm publish
+3. 사용
+   [..\project-ex03] $ npm i sewon-math
+   ======================================
