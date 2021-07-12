@@ -132,8 +132,6 @@ new Promise(function (resolve, reject) {
   });
 ```
 
-<a href="https://github.com/Sewonzzang123/node-practices/blob/main/helloweb-ex02/index.js"> helloweb-ex02/index.js</a> 에서 확인 가능.
-
 ## 프로미스의 에러 처리 방법
 
 프로미스의 reject() 메서드가 호출되어 실패 상태가 된 경우에 실행된다.
