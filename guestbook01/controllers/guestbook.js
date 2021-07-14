@@ -6,7 +6,7 @@ module.exports = {
     // console.log(results);
     res.render("index", { list: results || [] });
   },
-  form: function (req, res) {
+  deleteform: function (req, res) {
     res.render("deleteform", { no: req.query.no, notcorrect: 1 });
   },
   delete: async function (req, res) {
