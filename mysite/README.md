@@ -2,9 +2,11 @@
 
 ### 설치 패키지
 
+```bash
 [..\mysite] $ npm i express
 [..\mysite] $ npm i ejs
 [..\mysite] $ npm i -D nodemon
+```
 
 ### scripts in package.json
 
