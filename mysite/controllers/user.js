@@ -1,10 +1,10 @@
 const models = require("../models");
 
 module.exports = {
-  joinform: function (req, res) {
+  join: function (req, res) {
     res.render("user/joinform");
   },
-  join: async function (req, res) {
+  _join: async function (req, res) {
     // Create a new user
     // https://sequelize.org/master/manual/model-querying-basics.html 참조
     const result = await models.User.create({
@@ -19,10 +19,10 @@ module.exports = {
   joinsuccess: function (req, res) {
     res.render("user/joinsuccess");
   },
-  loginform: function (req, res) {
+  login: function (req, res) {
     res.render("user/loginform");
   },
-  login: async function (req, res) {
+  _login: async function (req, res) {
     const user = await models.User.findOne({
       attributes: ["no", "name", "role"],
       where: {
@@ -32,8 +32,64 @@ module.exports = {
     });
     // console.log(user); /**user.name, ...으로 접근 가능 */
     if (user == null) {
-      res.render("user/loginform", { result: "fail" });
+      res.render(
+        "user/loginform",
+        Object.assign(req.body, { result: "fail", password: "" })
+      );
+      return;
     }
+    //로그인 처리
+    user.password = "";
+    req.session.authUser = user;
     res.redirect("/");
+  },
+  logout: async function (req, res) {
+    await req.session.destroy();
+    res.redirect("/");
+  },
+  update: async function (req, res) {
+    const no = req.session.authUser.no;
+    const user = await models.User.findOne({
+      attributes: ["no", "email", "name", "gender"],
+      where: {
+        no: no,
+      },
+    });
+    res.render("user/update", {
+      email: user.email,
+      name: user.name,
+      gender: user.gender,
+    });
+  },
+  _update: async function (req, res) {
+    console.log(req.body);
+    if (req.body.password == "") {
+      await models.User.update(
+        {
+          name: req.body.name,
+          gender: req.body.gender,
+        },
+        {
+          where: {
+            email: req.body.email,
+          },
+        }
+      );
+    } else {
+      await models.User.update(
+        {
+          name: req.body.name,
+          password: req.body.password,
+          gender: req.body.gender,
+        },
+        {
+          where: {
+            email: req.body.email,
+          },
+        }
+      );
+    }
+    req.session.authUser.name = req.body.name;
+    res.redirect("/user/update");
   },
 };

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/assets/css/guestbook.css" rel="stylesheet" type="text/css" />
+    <title>방명록</title>
+  </head>
+  <body>
+    <div id="container">
+      <%- include('../includes/header') %>
+      <div id="content">
+        <form method="post" action="/guestbook/delete">
+          <input
+            type="hidden"
+            name="no"
+            value="<%=no %>"
+          /><!-- 번호 들어가야 하는 자리 hidden -->
+          <table>
+            <tr>
+              <td>비밀번호</td>
+              <td>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="<% if(locals.result && result === '0'){ %>틀렸습니다<% }else{ %>password <% } %>"
+                />
+              </td>
+              <td><input type="submit" value="확인" /></td>
+            </tr>
+          </table>
+          <br />
+          <a href="/guestbook">메인으로 돌아가기</a>
+        </form>
+      </div>
+      <%- include('../includes/navigation') %> <%- include('../includes/footer')
+      %>
+    </div>
+  </body>
+</html>
