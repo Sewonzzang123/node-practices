@@ -43,8 +43,11 @@
 
 ### 실행
 
+```bash
 [..\mysite] $ npm start (운용시 ...)
 [..\mysite] $ npm run debug(개발시 ... Live Update)
+
+```
 
 ### 추가 설치 패키지
 
