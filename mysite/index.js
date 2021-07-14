@@ -4,12 +4,13 @@ const http = require("http");
 const path = require("path");
 const dotenv = require("dotenv");
 
+//environment variables(환경변수)
+dotenv.config({ path: path.join(__dirname, "config/app.env") });
+dotenv.config({ path: path.join(__dirname, "config/db.env") });
+
 //Routers
 const mainRouter = require("./routes/main");
 const userRouter = require("./routes/user");
-
-//environment variables(환경변수)
-dotenv.config({ path: path.join(__dirname, "config/app.env") });
 
 // application setup 작업
 const application = express()

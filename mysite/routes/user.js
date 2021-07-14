@@ -5,4 +5,6 @@ const router = express.Router();
 router.route("/join").get(controller.joinform);
 router.route("/join").post(controller.join);
 router.route("/joinsuccess").get(controller.joinsuccess);
+router.route("/login").get(controller.loginform);
+router.route("/login").post(controller.login);
 module.exports = router;

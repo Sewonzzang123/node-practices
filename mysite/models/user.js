@@ -1,6 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-//
 module.exports = function (sequelize) {
   //user라는 객체의 정보를 정의.
   return sequelize.define(
