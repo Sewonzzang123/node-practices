@@ -39,6 +39,8 @@
     |--- package-lock.json
     |--- /node-modules
     |--- /config
+    |--- /logging
+    |--- /logs
     |--- /public
     |--- /routes
     |--- /controllers
@@ -70,3 +72,5 @@ sequelize가 인식해야해 <a href="https://sequelize.org/master/">how to use<
 2. moment js (front 에서 (ejs...)): <a href="https://momentjs.com/">how to use </a>
 
 ### log
+
+<a href="">go to README</a>

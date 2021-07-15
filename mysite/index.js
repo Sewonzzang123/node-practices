@@ -13,6 +13,10 @@ dotenv.config({ path: path.join(__dirname, "config/db.env") });
 const mainRouter = require("./routes/main");
 const userRouter = require("./routes/user");
 const guestbookRouter = require("./routes/guestbook");
+
+// Logging
+const logger = require("./logging");
+
 // application setup 작업
 const application = express()
   // 1. static serve
