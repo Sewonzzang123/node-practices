@@ -1,3 +1,4 @@
+/*
 const { Sequelize, DataTypes } = require("sequelize");
 
 module.exports = function (sequelize) {
@@ -31,7 +32,8 @@ module.exports = function (sequelize) {
       timestamp: true,
       createdAt: false,
       updatedAt: false,
-      tableName: "site",
+      tableName: "site"sdvz,
     }
   );
 };
+*/

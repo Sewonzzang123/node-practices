@@ -11,7 +11,8 @@
 [..\mysite] $ npm i express-session
 [..\mysite] $ npm i ejs
 [..\mysite] $ npm i dotenv
-[..\mysite] $ npm i sequelize
+[..\mysite] $ npm i sequelize (sql문 내에서 date format 하려고 설치함)
+[..\mysite] $ npm i moment ( ejs에서 date format 하기위함)
 [..\mysite] $ npm i mysql2
 [..\mysite] $ npm i -D nodemon
 ```

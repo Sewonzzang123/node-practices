@@ -41,13 +41,13 @@
 					<td><%=vo.regDate %></td>
 					<td>
 					  <a
-						href="/guestbook/delete?no=<%=vo.no%>"
+						href="/guestbook/delete/<%=vo.no%>"
 						>삭제</a
 					  >
 					</td>
 				  </tr>
 				  <tr>
-					<td colspan="4"><%=vo.message %></td>
+					<td colspan="4"><%-vo.message.replace(/\n/g, '<br/>') %></td>
 				  </tr>
 				</table>
 				<% index++; } %>

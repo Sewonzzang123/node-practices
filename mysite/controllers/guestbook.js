@@ -1,29 +1,33 @@
 const models = require("../models");
 const Sequelize = require("sequelize");
 module.exports = {
-  index: async function (req, res) {
-    const results = await models.Guestbook.findAll({
-      attributes: [
-        "no",
-        "name",
-        "message",
-        [
-          Sequelize.fn(
-            "date_format",
-            Sequelize.col("reg_date"),
-            "%Y/%m/%d %H:%i:%s"
-          ),
-          "regDate",
+  index: async function (req, res, next) {
+    try {
+      const results = await models.Guestbook.findAll({
+        attributes: [
+          "no",
+          "name",
+          "message",
+          [
+            Sequelize.fn(
+              "date_format",
+              Sequelize.col("reg_date"),
+              "%Y/%m/%d %H:%i:%s"
+            ),
+            "regDate",
+          ],
         ],
-      ],
-      order: Sequelize.literal("reg_date DESC"),
-    });
-    res.render("guestbook/index", { list: results || [] });
+        order: Sequelize.literal("reg_date DESC"),
+      });
+      res.render("guestbook/index", { list: results || [] });
+    } catch (err) {
+      next(err);
+    }
   },
   delete: function (req, res) {
-    res.render("guestbook/deleteform", { no: req.query.no });
+    res.render("guestbook/deleteform");
   },
-  _delete: async function (req, res) {
+  _delete: async function (req, res, next) {
     try {
       const results = await models.Guestbook.destroy({
         where: {
@@ -41,17 +45,19 @@ module.exports = {
         });
       }
     } catch (err) {
-      console.error(err);
-    } finally {
-      console.log("!!");
+      next(err);
     }
   },
-  add: async function (req, res) {
-    await models.Guestbook.create({
-      name: req.body.name,
-      password: req.body.password,
-      message: req.body.message,
-    });
-    res.redirect("/guestbook");
+  add: async function (req, res, next) {
+    try {
+      await models.Guestbook.create({
+        name: req.body.name,
+        password: req.body.password,
+        message: req.body.message,
+      });
+      res.redirect("/guestbook");
+    } catch (err) {
+      next(err);
+    }
   },
 };

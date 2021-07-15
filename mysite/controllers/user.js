@@ -47,49 +47,38 @@ module.exports = {
     await req.session.destroy();
     res.redirect("/");
   },
-  update: async function (req, res) {
-    const no = req.session.authUser.no;
-    const user = await models.User.findOne({
-      attributes: ["no", "email", "name", "gender"],
-      where: {
-        no: no,
-      },
-    });
-    res.render("user/update", {
-      email: user.email,
-      name: user.name,
-      gender: user.gender,
-    });
-  },
-  _update: async function (req, res) {
-    console.log(req.body);
-    if (req.body.password == "") {
-      await models.User.update(
-        {
-          name: req.body.name,
-          gender: req.body.gender,
+  update: async function (req, res, next) {
+    try {
+      const user = await models.User.findOne({
+        attributes: ["no", "email", "name", "gender"],
+        where: {
+          no: req.session.authUser.no,
         },
-        {
-          where: {
-            email: req.body.email,
-          },
-        }
-      );
-    } else {
-      await models.User.update(
-        {
-          name: req.body.name,
-          password: req.body.password,
-          gender: req.body.gender,
-        },
-        {
-          where: {
-            email: req.body.email,
-          },
-        }
-      );
+      });
+      res.render("user/update", {
+        email: user.email,
+        name: user.name,
+        gender: user.gender,
+      });
+    } catch (err) {
+      next(err);
     }
-    req.session.authUser.name = req.body.name;
-    res.redirect("/user/update");
+  },
+  _update: async function (req, res, next) {
+    try {
+      const {
+        [req.body.password == "" ? "password" : ""]: remove,
+        ...updateObject
+      } = req.body;
+      await models.User.update(updateObject, {
+        where: {
+          no: req.session.authUser.no,
+        },
+      });
+      res.session.authUser.name = req.body.name;
+      res.redirect("/user/update");
+    } catch (e) {
+      next(e);
+    }
   },
 };
