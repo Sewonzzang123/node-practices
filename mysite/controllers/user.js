@@ -75,7 +75,7 @@ module.exports = {
           no: req.session.authUser.no,
         },
       });
-      res.session.authUser.name = req.body.name;
+      req.session.authUser.name = req.body.name;
       res.redirect("/user/update");
     } catch (e) {
       next(e);
