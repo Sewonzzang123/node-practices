@@ -1,6 +1,6 @@
 const express = require("express");
 const controller = require("../controllers/user");
-const auth = require("./auth");
+const authorized = require("./authorized");
 
 const router = express.Router();
 // router.route("/join").get(controller.joinform);
@@ -14,7 +14,7 @@ router.route("/login").post(controller._login);
 
 router.route("/logout").get(controller.logout);
 
-router.route("/update").get(auth, controller.update);
-router.route("/update").post(auth, controller._update);
+router.route("/update").get(authorized, controller.update);
+router.route("/update").post(authorized, controller._update);
 
 module.exports = router;

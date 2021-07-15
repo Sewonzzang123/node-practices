@@ -12,7 +12,9 @@ dotenv.config({ path: path.join(__dirname, "config/db.env") });
 //Routers
 const mainRouter = require("./routes/main");
 const userRouter = require("./routes/user");
+const userApiRouter = require("./routes/user-api");
 const guestbookRouter = require("./routes/guestbook");
+const errorRouter = require("./routes/error");
 
 // Logging
 const logger = require("./logging");
@@ -46,26 +48,24 @@ const application = express()
   })
   .use("/", mainRouter)
   .use("/user", userRouter)
+  .use("/api/user", userApiRouter)
   .use("/guestbook", guestbookRouter)
-  .use((req, res) => {
-    //없는 것들에 대한 처리
-    res.render("error/404");
-  });
-
+  .use(errorRouter.error404)
+  .use(errorRouter.error500);
 // server setup
 http
   .createServer(application)
   .on("listening", function () {
-    console.info(`Http Server running on port ${process.env.PORT}`);
+    logger.info(`Http Server running on port ${process.env.PORT}`);
   })
   .on("error", function (error) {
     switch (error.code) {
       case "EACCESS":
-        console.error(`Port:${process.env.PORT} requires privileges`);
+        logger.error(`Port:${process.env.PORT} requires privileges`);
         process.exit(1);
         break;
       case "EADDRINUSE":
-        console.error(`Port:${process.env.PORT} is already in use`);
+        logger.error(`Port:${process.env.PORT} is already in use`);
         process.exit(1);
         break;
       default:
