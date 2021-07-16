@@ -4,6 +4,7 @@ const session = require("express-session");
 const http = require("http");
 const path = require("path");
 const dotenv = require("dotenv");
+const multer = require("multer");
 
 //environment variables(환경변수)
 dotenv.config({ path: path.join(__dirname, "config/app.env") });
@@ -15,6 +16,7 @@ const userRouter = require("./routes/user");
 const userApiRouter = require("./routes/user-api");
 const guestbookRouter = require("./routes/guestbook");
 const guestbookApiRouter = require("./routes/guestbook-api");
+const galleryRouter = require("./routes/gallery");
 const errorRouter = require("./routes/error");
 
 // Logging
@@ -22,11 +24,7 @@ const logger = require("./logging");
 
 // application setup 작업
 const application = express()
-  // 1. static serve
-  .use(
-    express.static(path.join(__dirname, process.env.STATIC_RESOURCES_DIRECTORY))
-  )
-  // 2. session environment
+  // 1. session environment
   .use(
     session({
       secret: "mysite-session", //쿠키 변조를 방지하기 위한 값
@@ -35,9 +33,20 @@ const application = express()
       saveUninitialized: false,
     })
   )
-  // 3. request body-parser
+  // 2. request body-parser
   .use(express.urlencoded({ extended: true })) //application/x-www-form-urlencoded
   .use(express.json()) // application/json
+  // multipart
+  .use(
+    multer({
+      dest: path.join(__dirname, process.env.MULTER_TEMPORARY_STORE),
+    }).single("file" /** form input type = file */)
+  )
+  // 3. static serve
+  .use(
+    express.static(path.join(__dirname, process.env.STATIC_RESOURCES_DIRECTORY))
+  )
+
   // 4. view engine setup
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
@@ -52,6 +61,7 @@ const application = express()
   .use("/api/user", userApiRouter)
   .use("/guestbook", guestbookRouter)
   .use("/api/guestbook", guestbookApiRouter)
+  .use("/gallery", galleryRouter)
   .use(errorRouter.error404)
   .use(errorRouter.error500);
 // server setup

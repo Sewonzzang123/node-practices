@@ -14,6 +14,7 @@
 [..\mysite] $ npm i sequelize (sql문 내에서 date format 하려고 설치함)
 [..\mysite] $ npm i moment ( ejs에서 date format 하기위함)
 [..\mysite] $ npm i mysql2
+[..\mysite] $ npm i multer (file upload))
 [..\mysite] $ npm i winston (log)
 [..\mysite] $ npm i winston-daily-rotate-file
 [..\mysite] $ npm i -D nodemon
@@ -41,7 +42,10 @@
     |--- /config
     |--- /logging
     |--- /logs
+    |--- /multer-temporary-store
     |--- /public
+            |--- /assets
+                    |--- /gallery
     |--- /routes
     |--- /controllers
     |--- /models
