@@ -19,6 +19,7 @@
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
     />
+    <script type="text/javascript" src="/assets/ejs/ejs.js"></script>
     <script
       type="text/javascript"
       src="/assets/js/jquery/jquery-3.6.0.js"
@@ -26,27 +27,9 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script>
-      var listEJS = function (data) {
-        data.forEach((vo) => {
-          let html = "";
-          html += `<li data-no='${vo.no}'>`;
-          html += `<strong>${vo.name}</strong>`;
-          html += `<p>${vo.message.replace(/\n/gi, "<br/>")}</p>`;
-          html += `<strong>${vo.regDate}</strong>`;
-          html += `<a href='' data-no='${vo.no}'>삭제</a></li>`;
-          $("#list-guestbook").append(html);
-        });
-      };
+      var listEJS = new EJS({ url: "/assets/ejs/list-template.ejs" });
 
-      var listItemEJS = function (vo) {
-        let html = "";
-        html += `<li data-no='${vo.no}'>`;
-        html += `<strong>${vo.name}</strong>`;
-        html += `<p>${vo.message.replace(/\n/gi, "<br/>")}</p>`;
-        html += `<strong>${vo.regDate}</strong>`;
-        html += `<a href='' data-no='${vo.no}'>삭제</a></li>`;
-        $("#list-guestbook").prepend(html);
-      };
+      var listItemEJS = new EJS({ url: "/assets/ejs/listitem-template.ejs" });
 
       var fetch = function () {
         var no = $("#list-guestbook li:last-child").data("no");
@@ -64,7 +47,8 @@
               let html = "<li><strong>더 이상 글이 없습니다.</strong></li>";
               $("#list-guestbook").append(html);
             } else {
-              listEJS(response.data);
+              let html = listEJS.render(response);
+              $("#list-guestbook").append(html);
             }
           },
         });
@@ -104,8 +88,8 @@
           data: JSON.stringify(vo), // post요청시 보내는 데이터
           success: function (response) {
             var vo = response.data;
-            listItemEJS(vo);
-
+            let html = listItemEJS.render(vo);
+            $("#list-guestbook").prepend(html);
             $("#add-form")[0].reset();
             //많아지면 어떻게 할래?? ㅇㅅㅇ...
             //$("#input-name").val("");
