@@ -5,13 +5,23 @@ const fs = require("fs");
 module.exports = {
   index: async function (req, res, next) {
     try {
-      res.render("gallery/index");
+      const results = await models.Gallery.findAll({
+        attribute: ["no", "url", "comment"],
+        order: [["no", "desc"]],
+      });
+      res.render("gallery/index", { galleries: results });
     } catch (err) {
       next(err);
     }
   },
   delete: async function (req, res, next) {
     try {
+      await models.Gallery.destroy({
+        where: {
+          no: req.params.no,
+        },
+      });
+      res.redirect("/gallery");
     } catch (err) {
       next(err);
     }

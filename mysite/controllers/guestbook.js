@@ -60,4 +60,7 @@ module.exports = {
       next(err);
     }
   },
+  spa: function (req, res) {
+    res.render("guestbook/spa-landing");
+  },
 };
