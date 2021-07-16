@@ -43,7 +43,7 @@ module.exports = {
     try {
       console.log(req.body);
       //db insert
-      await models.User.create();
+      // await models.Guestbook.create();
 
       res.status(200).send({
         result: "success",
