@@ -9,4 +9,11 @@ router.route("/needauth").get(auth, function (req, res) {
     result: "success",
   });
 });
+router.route("/error").get(function (req, res, next) {
+  try {
+    throw new Error("Broken");
+  } catch (err) {
+    next(err);
+  }
+});
 module.exports = router;

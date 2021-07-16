@@ -14,6 +14,7 @@ const mainRouter = require("./routes/main");
 const userRouter = require("./routes/user");
 const userApiRouter = require("./routes/user-api");
 const guestbookRouter = require("./routes/guestbook");
+const guestbookApiRouter = require("./routes/guestbook-api");
 const errorRouter = require("./routes/error");
 
 // Logging
@@ -50,6 +51,7 @@ const application = express()
   .use("/user", userRouter)
   .use("/api/user", userApiRouter)
   .use("/guestbook", guestbookRouter)
+  .use("/api/guestbook", guestbookApiRouter)
   .use(errorRouter.error404)
   .use(errorRouter.error500);
 // server setup
