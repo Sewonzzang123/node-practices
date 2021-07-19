@@ -30,11 +30,8 @@
       var listEJS = new EJS({ url: "/assets/ejs/list-template.ejs" });
 
       var listItemEJS = new EJS({ url: "/assets/ejs/listitem-template.ejs" });
-      var isFetching = false;
+
       var fetch = function () {
-        if (isFetching) {
-          return;
-        }
         var no = $("#list-guestbook li:last-child").data("no");
         if (undefined == no) {
           no = -1;
@@ -55,7 +52,6 @@
             }
           },
         });
-        isFetching = !isFetching;
       };
       var add = function (event) {
         event.preventDefault();

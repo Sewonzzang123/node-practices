@@ -17,6 +17,8 @@
 [..\mysite] $ npm i multer (file upload))
 [..\mysite] $ npm i winston (log)
 [..\mysite] $ npm i winston-daily-rotate-file
+[..\mysite] $ npm i -D mocha (test)
+[..\mysite] $ npm i -D chai
 [..\mysite] $ npm i -D nodemon
 ```
 
@@ -24,10 +26,11 @@
 
 ```JSON
 
-"scripts": {
-"start": "index.js",
-"debug": "nodemon index.js"
-},
+ "scripts": {
+    "start": "index.js",
+    "test": "npx mocha",
+    "debug": "nodemon index.js"
+  },
 
 ```
 
@@ -35,27 +38,35 @@
 
 <pre>
 /mysite
-    |--- index.js 
+    |--- index.js
     |--- package.json
     |--- package-lock.json
-    |--- /node-modules
-    |--- /config
-    |--- /logging
-    |--- /logs
-    |--- /multer-temporary-store
-    |--- /public
-            |--- /assets
-                    |--- /gallery
-    |--- /routes
-    |--- /controllers
-    |--- /models
-    |--- /views
-            |--- /main
-            |--- /user
-            |--- /guestbook
-            |--- /board
-            |--- /gallery
-            |--- /admin
+    |--- [node_modules]
+    |--- test
+    |--- logging
+    |--- [logs]
+    |       |--- [error]
+    |--- [multer-temporary-store]
+    |--- config
+    |--- public
+    |       |--- assets
+    |               |--- js
+    |               |--- css
+    |               |--- images
+    |               |--- [upload-images]
+    |--- routes
+    |--- controllers
+    |       |--- admin
+    |--- models
+    |--- views
+            |--- main
+            |--- admin
+            |       |--- includes
+            |--- user
+            |--- board
+            |--- guestbook
+            |--- gallery
+            |--- includes
 </pre>
 
 ### 실행

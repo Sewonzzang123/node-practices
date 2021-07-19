@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.route("").get(controller.index);
 router.route("/delete/:no").get(authorized("ADMIN"), controller.delete);
-router.route("/upload").post(controller.upload);
+router.route("/upload").post(authorized("ADMIN"), controller.upload);
 
 module.exports = router;
