@@ -17,7 +17,7 @@ describe("Model user", function () {
     models = require("../models");
   });
 
-  it("test !!!!", async function () {
+  it("fetch User(no=1)", async function () {
     const user = await models.User.findOne({ where: { no: 1 } });
     assert.equal(user.no, 1);
   });

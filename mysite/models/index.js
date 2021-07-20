@@ -21,12 +21,12 @@ const Board = require("./Board")(sequelize);
 User.hasMany(Board, {
   foreignKey: {
     name: "userNo",
+    type: DataTypes.INTEGER(11),
     allowNull: false,
     constraints: true,
-    onDelete: "CASCADE",
   },
 });
-Board.belongsTo(User);
+Board.belongsTo(User, { onDelete: "cascade", hooks: true });
 
 //객체의 sync작업을 해야해
 User.sync({

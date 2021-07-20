@@ -7,7 +7,7 @@ module.exports = function (sequelize) {
     {
       no /* node 안에서 정의하는 이름 */: {
         field: "no" /* 테이블에서의 칼럼명 */,
-        type: DataTypes.BIGINT(11),
+        type: DataTypes.INTEGER(11),
         primaryKey: true /* 없으면 안쓰면 됨 */,
         autoIncrement: true,
       },

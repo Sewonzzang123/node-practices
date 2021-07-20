@@ -89,3 +89,28 @@ sequelize가 인식해야해 <a href="https://sequelize.org/master/">how to use<
 ### log
 
 <a href="">go to README</a>
+
+### db foreign key 설정
+
+<a href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=pjt3591oo&logNo=221217138921">참고 사이트</a>
+
+hooks: 후크 (라이프 사이클 이벤트라고도 함)는 시퀀스에서 호출이 실행되기 전후에 호출되는 함수입니다.
+
+beforeDestroy/afterDestroy 후크를 호출하는 방법으로 onDelete:'cascade' 그리고 hooks:true 옵션과 함께 관계를 가진다,
+
+```javascript
+User.hasMany(Board, {
+  foreignKey: {
+    name: "userNo",
+    type: DataTypes.INTEGER(11),
+    allowNull: false,
+    constraints: true,
+  },
+});
+
+Board.belongsTo(User, { onDelete: "cascade", hooks: true });
+```
+
+```sql
+ALTER TABLE `board` ADD FOREIGN KEY (`user_no`) REFERENCES `user` (`no`) ON DELETE CASCADE ON UPDATE CASCADE;
+```
