@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>mysite</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link
+	href="/assets/css/admin/main.css"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div id="container">
+		<%- include('../admin/include/header') %>
+		<div id="wrapper">
+			<div id="content">
+				<div id="site-form">
+					<form method="post"
+					enctype="multipart/form-data"
+						action="/admin/update">
+						<label class="block-label" for="title">사이트 타이틀</label>
+						<input type="text" name="title" id="title" value='<%= site.title %>' />
+						<label class="block-label" for="welcomeMessage">환영 메세지</label>
+						<input type="text" name="welcome" id="welcome" value='<%= site.welcome %>' />
+						<label class="block-label">프로필 이미지</label>
+						<img id="profile"
+							src="<%= site.profile %>">
+						<input type="file" id="file" name="file" value="" />
+						<label class="block-label">사이트 설명</label>
+						<input type="textarea" name="description" id="description" value='<%= site.description %>'/>
+						<input type="submit" value="변경" />
+					</form:form>
+
+
+
+				</div>
+			</div>
+			<%- include('../admin/include/navigation') %>
+				<c:param name="menu" value="main" />
+			</c:import>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,9 +1,9 @@
 module.exports = function (role) {
   return function (req, res, next) {
-    console.log("authorized() called " + role);
+    // console.log("authorized() called " + role);
     if (
-      (req.session.authUser && role != "ADMIN") ||
-      req.session.authUser.role === "ADMIN"
+      req.session.authUser &&
+      (role !== "ADMIN" || req.session.authUser.role === "ADMIN")
     ) {
       next();
       return;

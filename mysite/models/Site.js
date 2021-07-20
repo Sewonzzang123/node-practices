@@ -1,4 +1,3 @@
-/*
 const { Sequelize, DataTypes } = require("sequelize");
 
 module.exports = function (sequelize) {
@@ -11,17 +10,17 @@ module.exports = function (sequelize) {
         allowNull: false,
       },
       welcome: {
-        field: "title",
+        field: "welcome",
         type: DataTypes.STRING(200),
         allowNull: false,
       },
       profile: {
-        field: "title",
+        field: "profile",
         type: DataTypes.STRING(200),
         allowNull: false,
       },
       description: {
-        field: "title",
+        field: "description",
         type: DataTypes.STRING(500),
         allowNull: false,
       },
@@ -32,8 +31,7 @@ module.exports = function (sequelize) {
       timestamp: true,
       createdAt: false,
       updatedAt: false,
-      tableName: "site"sdvz,
+      tableName: "site",
     }
   );
 };
-*/
